@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import SupportModal from './SupportModal';
 
 const Footer = () => {
+    const [activeModal, setActiveModal] = useState(null);
+
     return (
         <footer className="footer">
             <div className="container">
@@ -30,9 +33,9 @@ const Footer = () => {
                         <div className="link-col">
                             <h4>サポート</h4>
                             <ul>
-                                <li><a href="#apply">お問い合わせ</a></li>
-                                <li><a href="#">プライバシーポリシー</a></li>
-                                <li><a href="#">利用規約</a></li>
+                                <li><a href="#contact" onClick={(e) => { e.preventDefault(); setActiveModal('contact'); }}>お問い合わせ</a></li>
+                                <li><a href="#privacy" onClick={(e) => { e.preventDefault(); setActiveModal('privacy'); }}>プライバシーポリシー</a></li>
+                                <li><a href="#terms" onClick={(e) => { e.preventDefault(); setActiveModal('terms'); }}>利用規約</a></li>
                             </ul>
                         </div>
                     </div>
@@ -42,6 +45,12 @@ const Footer = () => {
                     <p>&copy; {new Date().getFullYear()} 令和スキルアップ研究会 (RSC). All rights reserved.</p>
                 </div>
             </div>
+
+            <SupportModal 
+                isOpen={activeModal !== null} 
+                type={activeModal} 
+                onClose={() => setActiveModal(null)} 
+            />
 
             <style>{`
                 .footer {
