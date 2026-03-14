@@ -31,6 +31,31 @@ const Hero = () => {
                         RSCについてもっと知る
                     </a>
                 </div>
+                
+                {/* おすすめキーワード タグエリア */}
+                <div className="hero-tags-section animate-fade-in" style={{ animationDelay: '0.5s' }}>
+                    <p style={{ fontWeight: 700, color: '#475569', fontSize: '1.1rem', marginBottom: '24px' }}>こんなキーワードに興味がある方におすすめ！</p>
+                    <div className="hero-tags-container">
+                        {[
+                            { text: "#自己投資", color: "yellow" },
+                            { text: "#自己啓発", color: "purple" },
+                            { text: "#投資", color: "green" },
+                            { text: "#東京", color: "yellow" },
+                            { text: "#オンライン", color: "purple" },
+                            { text: "#金持ち父さん", color: "purple" },
+                            { text: "#スキルアップ", color: "green" },
+                            { text: "#NISA", color: "yellow" },
+                            { text: "#自己実現", color: "green" },
+                            { text: "#株式", color: "green" },
+                            { text: "#不動産", color: "yellow" },
+                            { text: "#経済", color: "purple" }
+                        ].map((tag, index) => (
+                            <span key={index} className={`hero-tag hero-tag-${tag.color}`}>
+                                {tag.text}
+                            </span>
+                        ))}
+                    </div>
+                </div>
             </div>
 
             <style>{`
@@ -92,6 +117,44 @@ const Hero = () => {
                 .btn-large {
                     padding: 16px 36px;
                     font-size: 1.1rem;
+                }
+                
+                .hero-tags-section {
+                    max-width: 800px;
+                    margin: 48px auto 0;
+                    padding: 32px 20px;
+                    border: 2px dashed #cbd5e1;
+                    border-radius: 16px;
+                    background: rgba(255, 255, 255, 0.5);
+                }
+                
+                .hero-tags-container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 12px;
+                    justify-content: center;
+                }
+                
+                .hero-tag {
+                    padding: 8px 16px;
+                    border-radius: 9999px;
+                    font-weight: 700;
+                    font-size: 0.95rem;
+                }
+                
+                .hero-tag-yellow {
+                    background-color: #fef3c7;
+                    color: #d97706;
+                }
+                
+                .hero-tag-purple {
+                    background-color: #e2e8f0;
+                    color: #475569;
+                }
+                
+                .hero-tag-green {
+                    background-color: #dcfce7;
+                    color: #16a34a;
                 }
                 
                 .mobile-break { display: none; }
