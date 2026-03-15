@@ -14,6 +14,7 @@ const ApplicationForm = () => {
             const flatSchedules = data.flatMap(ev => 
                 ev.allSchedules ? ev.allSchedules.map(schedule => ({
                     id: schedule.id,
+                    masterEventId: ev.id,
                     title: ev.title,
                     date: schedule.date,
                     time: schedule.time,
@@ -25,23 +26,31 @@ const ApplicationForm = () => {
             const hash = window.location.hash;
             if (hash && hash.includes('eventId=')) {
                 const id = hash.split('eventId=')[1];
-                if (flatSchedules.find(e => e.id === id && e.status === 'open')) {
-                    setFormData(prev => ({ ...prev, eventId: id }));
+                const targetSchedule = flatSchedules.find(e => e.masterEventId === id && e.status === 'open');
+                if (targetSchedule) {
+                    setFormData(prev => ({ ...prev, eventId: targetSchedule.id }));
                 }
             }
         };
         fetchEvents();
-        
+    }, []);
+
+    useEffect(() => {
         const handleHashChange = () => {
             const hash = window.location.hash;
             if (hash && hash.includes('eventId=')) {
                 const id = hash.split('eventId=')[1];
-                setFormData(prev => ({ ...prev, eventId: id }));
+                if (events.length > 0) {
+                    const targetSchedule = events.find(e => e.masterEventId === id && e.status === 'open');
+                    if (targetSchedule) {
+                        setFormData(prev => ({ ...prev, eventId: targetSchedule.id }));
+                    }
+                }
             }
         };
         window.addEventListener('hashchange', handleHashChange);
         return () => window.removeEventListener('hashchange', handleHashChange);
-    }, []);
+    }, [events]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
