@@ -10,45 +10,16 @@ const Hero = () => {
 
             <div className="container relative" style={{ zIndex: 2 }}>
                 <div className="hero-badge badge badge-yellow mb-4 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-                    ✨ 20〜30代の学びと成長のコミュニティ (v2.1)
+                    ✨ 20〜30代の学びと成長のコミュニティ
                 </div>
                 
-                <style>{`
-                    .hero-title-inline {
-                        font-size: clamp(2.2rem, 6vw, 4rem) !important;
-                        font-weight: 800;
-                        line-height: 1.4 !important;
-                        margin-bottom: 24px;
-                        color: #1e293b;
-                        padding: 0 16px;
-                        word-break: keep-all !important;
-                        overflow-wrap: break-word !important;
-                    }
-                    .phrase-block {
-                        display: inline-block !important;
-                        white-space: nowrap !important;
-                        margin-bottom: 4px;
-                    }
-                    .highlight-inline {
-                        background: linear-gradient(transparent 60%, #fde047 60%) !important;
-                        padding: 0 6px !important;
-                        border-radius: 4px;
-                    }
-                    @media (max-width: 480px) {
-                        .hero-title-inline {
-                            font-size: 1.65rem !important;
-                            padding: 0 10px !important;
-                        }
-                    }
-                `}</style>
-                
-                <h1 className="hero-title-inline animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                    <span className="phrase-block">学校では学べない、</span>
+                <h1 className="hero-title animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                    <span className="title-phrase">学校では学べない、</span>
                     <wbr />
-                    <span className="phrase-block highlight-inline">社会人に役立つ知識</span>
-                    <span className="phrase-block">を</span>
+                    <span className="title-phrase text-highlight">社会人に役立つ知識</span>
+                    <span className="title-phrase">を</span>
                     <br className="mobile-break" />
-                    <span className="phrase-block">学ぼう</span>
+                    <span className="title-phrase">学ぼう</span>
                 </h1>
                 
                 <p className="hero-subtitle animate-fade-in" style={{ animationDelay: '0.3s' }}>
