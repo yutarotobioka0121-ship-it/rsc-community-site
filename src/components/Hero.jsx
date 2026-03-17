@@ -72,32 +72,23 @@ const Hero = () => {
                 }
                 
                 .hero-title {
-                    font-size: clamp(2.5rem, 5vw, 4rem);
+                    font-size: clamp(2rem, 8vw, 4rem);
                     font-weight: 800;
                     line-height: 1.25;
                     margin-bottom: 24px;
                     color: var(--color-text-main);
+                    padding: 0 16px;
                 }
                 
                 .text-highlight {
-                    position: relative;
-                    display: inline-block;
+                    display: inline;
+                    background: linear-gradient(transparent 60%, var(--color-accent-light) 60%);
                     color: var(--color-primary-dark);
+                    padding: 0 4px;
+                    border-radius: 4px;
                 }
                 
-                .text-highlight::after {
-                    content: '';
-                    position: absolute;
-                    bottom: 8px;
-                    left: 0;
-                    width: 100%;
-                    height: 12px;
-                    background-color: var(--color-accent-light);
-                    z-index: -1;
-                    opacity: 0.8;
-                    border-radius: 4px;
-                    transform: rotate(-1deg);
-                }
+                /* Removed .text-highlight::after as it is replaced by background gradient */
                 
                 .hero-subtitle {
                     font-size: clamp(1rem, 2vw, 1.15rem);
