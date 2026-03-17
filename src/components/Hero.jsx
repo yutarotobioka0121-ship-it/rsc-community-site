@@ -14,9 +14,12 @@ const Hero = () => {
                 </div>
                 
                 <h1 className="hero-title animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                    学校では学べない、<br />
-                    <span className="text-highlight">社会人に役立つ知識</span>を<br className="mobile-break" />
-                    学ぼう
+                    <span className="title-phrase">学校では学べない、</span>
+                    <wbr />
+                    <span className="title-phrase text-highlight">社会人に役立つ知識</span>
+                    <span className="title-phrase">を</span>
+                    <br className="mobile-break" />
+                    <span className="title-phrase">学ぼう</span>
                 </h1>
                 
                 <p className="hero-subtitle animate-fade-in" style={{ animationDelay: '0.3s' }}>

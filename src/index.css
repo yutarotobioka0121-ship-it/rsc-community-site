@@ -312,3 +312,36 @@ img {
 .agenda-time { font-weight: 700; width: 60px; flex-shrink: 0; }
 @media (max-width: 768px) { .modal-content { padding: 24px; border-radius: 16px; } .info-grid { grid-template-columns: 1fr; } }
 
+/* Hero Section Styles (Relocated from Hero.jsx for reliability and enhanced for unbreakable text wrapping) */
+.hero-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.4;
+    margin-bottom: 24px;
+    color: var(--color-text-main);
+    padding: 0 16px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+}
+
+.title-phrase {
+    display: inline-block;
+}
+
+.text-highlight {
+    background: linear-gradient(transparent 60%, var(--color-accent-light) 60%);
+    color: var(--color-primary-dark);
+    padding: 0 6px;
+    border-radius: 4px;
+}
+
+.mobile-break { display: none; }
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 1.6rem; /* Ensures the longest phrase (10 chars) fits on ~320px screens */
+        line-height: 1.5;
+        padding: 0 12px;
+    }
+    .mobile-break { display: block; }
+}
