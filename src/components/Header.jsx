@@ -17,7 +17,7 @@ const Header = () => {
         setMobileMenuOpen(false);
         const element = document.getElementById(id);
         if (element) {
-            const offset = 80; // Header height
+            const offset = 100; // Header height + extra breathing room
             const bodyRect = document.body.getBoundingClientRect().top;
             const elementRect = element.getBoundingClientRect().top;
             const elementPosition = elementRect - bodyRect;
