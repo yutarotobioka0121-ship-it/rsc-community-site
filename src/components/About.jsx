@@ -122,6 +122,7 @@ const About = () => {
                     line-height: 1.6;
                     font-family: var(--font-heading);
                     word-break: keep-all;
+                    overflow-wrap: break-word;
                 }
                 
                 .about-grid {
@@ -181,6 +182,18 @@ const About = () => {
                 
                 .keywords-cloud .badge:hover {
                     transform: scale(1.05) rotate(2deg);
+                }
+
+                @media (max-width: 768px) {
+                    .philosophy-quote {
+                        padding: 20px 16px;
+                    }
+                    .main-philosophy {
+                        font-size: 1.15rem;
+                        word-break: normal;
+                    }
+                    .quote-icon-top { font-size: 3rem; top: -10px; }
+                    .quote-icon-bottom { font-size: 3rem; bottom: -25px; }
                 }
             `}</style>
         </section>
