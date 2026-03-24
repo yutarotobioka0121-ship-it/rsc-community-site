@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PhilosophyModal from './PhilosophyModal';
 
 const About = () => {
+    const [isPhilosophyOpen, setIsPhilosophyOpen] = useState(false);
     const keywords = [
         "自己投資", "自己啓発", "投資", "東京", "イベント", 
         "勉強会", "キャッシュフローゲーム会", "金持ち父さん", 
@@ -13,6 +15,27 @@ const About = () => {
                 <div className="text-center mb-8">
                     <h2 className="section-title">RSCについて</h2>
                     <p className="section-subtitle mt-4">令和スキルアップ研究会 (RSC) とは？</p>
+                </div>
+
+                <div className="philosophy-section mb-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+                    <div className="philosophy-card card">
+                        <div className="philosophy-quote">
+                            <span className="quote-icon-top">“</span>
+                            <p className="main-philosophy">
+                                完璧じゃなくていい。ただ、昨日より一歩前へ。<br />
+                                その泥臭い挑戦の積み重ねが、やがて誰にも真似できないあなただけの『在り方』になる。
+                            </p>
+                            <span className="quote-icon-bottom">”</span>
+                        </div>
+                        <div className="text-center mt-6">
+                            <button 
+                                className="btn btn-accent" 
+                                onClick={() => setIsPhilosophyOpen(true)}
+                            >
+                                RSCの理念を詳しく見る
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="about-grid">
@@ -54,8 +77,52 @@ const About = () => {
                 </div>
             </div>
 
+            <PhilosophyModal 
+                isOpen={isPhilosophyOpen} 
+                onClose={() => setIsPhilosophyOpen(false)} 
+            />
+
             <style>{`
                 .bg-white { background-color: white; }
+                
+                .philosophy-section {
+                    max-width: 800px;
+                    margin: 0 auto;
+                }
+                
+                .philosophy-card {
+                    background: linear-gradient(135deg, var(--color-surface) 0%, #fffdfa 100%);
+                    border: 2px solid var(--color-accent-light);
+                    position: relative;
+                    overflow: hidden;
+                }
+                
+                .philosophy-quote {
+                    position: relative;
+                    padding: 24px 40px;
+                    text-align: center;
+                }
+                
+                .quote-icon-top, .quote-icon-bottom {
+                    position: absolute;
+                    font-size: 4rem;
+                    color: var(--color-accent);
+                    opacity: 0.2;
+                    font-family: serif;
+                    line-height: 1;
+                }
+                
+                .quote-icon-top { top: 0; left: 10px; }
+                .quote-icon-bottom { bottom: -20px; right: 10px; }
+                
+                .main-philosophy {
+                    font-size: 1.5rem;
+                    font-weight: 800;
+                    color: var(--color-text-main);
+                    line-height: 1.6;
+                    font-family: var(--font-heading);
+                    word-break: keep-all;
+                }
                 
                 .about-grid {
                     display: grid;
