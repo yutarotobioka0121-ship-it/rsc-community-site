@@ -6,6 +6,8 @@ const ApplicationForm = () => {
     const [formData, setFormData] = useState({
         name: '', email: '', phone: '', eventId: '', message: ''
     });
+    const [selectedEventInfo, setSelectedEventInfo] = useState(null);
+    const [isLocked, setIsLocked] = useState(false);
     const [status, setStatus] = useState(null); // 'submitting', 'success', 'error'
 
     useEffect(() => {
@@ -29,6 +31,8 @@ const ApplicationForm = () => {
                 const targetSchedule = flatSchedules.find(e => e.masterEventId === id && e.status === 'open');
                 if (targetSchedule) {
                     setFormData(prev => ({ ...prev, eventId: targetSchedule.id }));
+                    setSelectedEventInfo(targetSchedule);
+                    setIsLocked(true);
                 }
             }
         };
@@ -44,8 +48,14 @@ const ApplicationForm = () => {
                     const targetSchedule = events.find(e => e.masterEventId === id && e.status === 'open');
                     if (targetSchedule) {
                         setFormData(prev => ({ ...prev, eventId: targetSchedule.id }));
+                        setSelectedEventInfo(targetSchedule);
+                        setIsLocked(true);
                     }
                 }
+            } else if (hash === '#apply') {
+                // 一般的な申し込みフォーム（選択なし）の場合
+                setIsLocked(false);
+                setSelectedEventInfo(null);
             }
         };
         window.addEventListener('hashchange', handleHashChange);
@@ -54,6 +64,13 @@ const ApplicationForm = () => {
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleClearSelection = () => {
+        setIsLocked(false);
+        setSelectedEventInfo(null);
+        setFormData(prev => ({ ...prev, eventId: '' }));
+        window.history.pushState(null, '', '#apply');
     };
 
     const handleSubmit = async (e) => {
@@ -112,9 +129,14 @@ const ApplicationForm = () => {
         <section id="apply" className="section bg-white">
             <div className="container" style={{ maxWidth: '800px' }}>
                 <div className="text-center mb-8">
-                    <h2 className="section-title">参加申し込み</h2>
+                    <h2 className="section-title">
+                        {selectedEventInfo ? `${selectedEventInfo.title} お申し込み` : '参加申し込み'}
+                    </h2>
                     <p className="section-subtitle mt-4">
-                        RSCの勉強会・イベントに参加をご希望の方は、<br />以下のフォームよりお申し込みください。
+                        {selectedEventInfo 
+                            ? `${new Date(selectedEventInfo.date).toLocaleDateString('ja-JP')} 開催の「${selectedEventInfo.title}」へのお申し込みフォームです。`
+                            : 'RSCの勉強会・イベントに参加をご希望の方は、以下のフォームよりお申し込みください。'
+                        }
                     </p>
                 </div>
 
@@ -162,14 +184,31 @@ const ApplicationForm = () => {
                             
                             <div className="form-group">
                                 <label>参加希望のイベント <span className="req">必須</span></label>
-                                <select name="eventId" value={formData.eventId} onChange={handleChange} required>
-                                    <option value="" disabled>イベントを選択してください</option>
-                                    {events.map(ev => (
-                                        <option key={ev.id} value={ev.id} disabled={ev.status !== 'open'}>
-                                            {ev.title} - {new Date(ev.date).toLocaleDateString('ja-JP')}{ev.time ? ` ${ev.time}` : ''} {ev.status === 'open' ? '' : '(受付終了)'}
-                                        </option>
-                                    ))}
-                                </select>
+                                {isLocked && selectedEventInfo ? (
+                                    <div className="locked-event-display">
+                                        <div className="locked-event-info">
+                                            <strong>{selectedEventInfo.title}</strong>
+                                            <span>{new Date(selectedEventInfo.date).toLocaleDateString('ja-JP')} {selectedEventInfo.time}</span>
+                                        </div>
+                                        <button type="button" className="btn-change-event" onClick={handleClearSelection}>
+                                            日程を変更または選び直す
+                                        </button>
+                                        <input type="hidden" name="eventId" value={formData.eventId} />
+                                    </div>
+                                ) : (
+                                    <select name="eventId" value={formData.eventId} onChange={(e) => {
+                                        handleChange(e);
+                                        const found = events.find(ev => ev.id === e.target.value);
+                                        setSelectedEventInfo(found);
+                                    }} required>
+                                        <option value="" disabled>イベントを選択してください</option>
+                                        {events.map(ev => (
+                                            <option key={ev.id} value={ev.id} disabled={ev.status !== 'open'}>
+                                                {ev.title} - {new Date(ev.date).toLocaleDateString('ja-JP')}{ev.time ? ` ${ev.time}` : ''} {ev.status === 'open' ? '' : '(受付終了)'}
+                                            </option>
+                                        ))}
+                                    </select>
+                                )}
                             </div>
                             
                             <div className="form-group">
@@ -211,6 +250,54 @@ const ApplicationForm = () => {
                     font-weight: 700;
                     margin-bottom: 8px;
                     color: var(--color-text-main);
+                }
+
+                .locked-event-display {
+                    background-color: var(--color-bg-base);
+                    border: 2px solid var(--color-primary-light);
+                    border-radius: var(--radius-sm);
+                    padding: 16px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 16px;
+                }
+
+                @media (max-width: 600px) {
+                    .locked-event-display {
+                        flex-direction: column;
+                        align-items: flex-start;
+                    }
+                }
+
+                .locked-event-info {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .locked-event-info strong {
+                    font-size: 1.1rem;
+                    color: var(--color-primary-dark);
+                }
+
+                .locked-event-info span {
+                    font-size: 0.9rem;
+                    color: var(--color-text-muted);
+                }
+
+                .btn-change-event {
+                    background: none;
+                    border: none;
+                    color: var(--color-primary);
+                    font-size: 0.85rem;
+                    text-decoration: underline;
+                    cursor: pointer;
+                    padding: 0;
+                    white-space: nowrap;
+                }
+
+                .btn-change-event:hover {
+                    color: var(--color-primary-dark);
                 }
                 
                 .req {
