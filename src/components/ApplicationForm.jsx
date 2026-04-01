@@ -20,7 +20,12 @@ const ApplicationForm = () => {
                     title: ev.title,
                     date: schedule.date,
                     time: schedule.time,
-                    status: schedule.status
+                    status: schedule.status,
+                    // メール送信設定
+                    emailSubject: ev.emailSubject,
+                    emailBody: ev.emailBody,
+                    emailFrom: ev.emailFrom,
+                    emailFromName: ev.emailFromName
                 })) : []
             );
             setEvents(flatSchedules);
@@ -87,7 +92,12 @@ const ApplicationForm = () => {
                 phone: formData.phone,
                 eventTitle: selectedEvent ? selectedEvent.title : '未選択',
                 eventDate: selectedEvent ? `${new Date(selectedEvent.date).toLocaleDateString('ja-JP')} ${selectedEvent.time || ''}`.trim() : '未選択',
-                message: formData.message || 'なし'
+                message: formData.message || 'なし',
+                // カスタムメール情報
+                emailSubject: selectedEvent?.emailSubject || '',
+                emailBody: selectedEvent?.emailBody || '',
+                emailFrom: selectedEvent?.emailFrom || '',
+                emailFromName: selectedEvent?.emailFromName || ''
             };
 
             const endpoint = import.meta.env.VITE_GAS_ENDPOINT;
