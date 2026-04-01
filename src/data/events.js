@@ -64,29 +64,43 @@ import { client } from '../lib/microcms';
 
 export const getEventSchedule = async () => {
     try {
-        // 1. 開催日程(schedules)を取得
-        // date の昇順（古い順/近い順）で取得し、ステータスがclosed以外のものを優先するなどの条件も指定可能
-        const schedulesRes = await client.getList({
-            endpoint: 'schedules',
-            queries: {
-                orders: 'date',
-                limit: 100
-            }
-        });
+        // 1. 開催日程(schedules)とイベントマスター(events)を取得
+        const [schedulesRes, eventsRes] = await Promise.all([
+            client.getList({
+                endpoint: 'schedules',
+                queries: {
+                    orders: 'date',
+                    limit: 100
+                }
+            }),
+            client.getList({
+                endpoint: 'events',
+                queries: {
+                    limit: 100
+                }
+            })
+        ]);
 
         const schedules = schedulesRes.contents;
+        
+        // イベントマスターをマップ化（カスタムフィールド等の完全なデータを保持）
+        const eventMasterMap = new Map(eventsRes.contents.map(ev => [ev.id, ev]));
 
         // イベントIDごとに日程をグループ化するマップ
         const eventMap = new Map();
 
         // 2. 日程データをもとに、親であるイベント(event)ごとにまとめる
         schedules.forEach(schedule => {
-            // schedule.event には紐付けられた「勉強会マスター」のデータが入っている
-            const eventData = schedule.event;
+            // schedule.event には紐付けられた「勉強会マスター」の一部のデータが入っている
+            const baseEventData = schedule.event;
             
-            if (!eventData) return; // 親イベントが設定されていない場合はスキップ
+            if (!baseEventData) return; // 親イベントが設定されていない場合はスキップ
 
-            const eventId = eventData.id;
+            const eventId = baseEventData.id;
+            
+            // schedulesの中のeventには新しく追加したカスタムフィールドが含まれない場合があるため、
+            // 直接取得したeventsのマスターデータと統合する
+            const eventData = eventMasterMap.get(eventId) || baseEventData;
 
             // まだマップに登録されていないイベントなら初期化
             if (!eventMap.has(eventId)) {
