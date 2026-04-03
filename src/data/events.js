@@ -123,6 +123,7 @@ export const getEventSchedule = async () => {
                     emailBody: eventData.emailBody,
                     emailFrom: eventData.emailFrom,
                     emailFromName: eventData.emailFromName,
+                    notificationEmail: eventData.notificationEmail,
                     
                     // アジェンダは今回のCMS設計ではテキストエリア等にまとめている想定のため、一旦descriptionに含めるか別途パースが必要
                     // 以前の配列形式(agenda)に合わせるためのモック処理を残す（必要に応じてCMSの構造に合わせて改修）

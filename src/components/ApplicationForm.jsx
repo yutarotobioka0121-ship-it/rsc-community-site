@@ -25,7 +25,8 @@ const ApplicationForm = () => {
                     emailSubject: ev.emailSubject,
                     emailBody: ev.emailBody,
                     emailFrom: ev.emailFrom,
-                    emailFromName: ev.emailFromName
+                    emailFromName: ev.emailFromName,
+                    notificationEmail: ev.notificationEmail
                 })) : []
             );
             setEvents(flatSchedules);
@@ -97,7 +98,8 @@ const ApplicationForm = () => {
                 emailSubject: selectedEvent?.emailSubject || '',
                 emailBody: selectedEvent?.emailBody || '',
                 emailFrom: selectedEvent?.emailFrom || '',
-                emailFromName: selectedEvent?.emailFromName || ''
+                emailFromName: selectedEvent?.emailFromName || '',
+                notificationEmail: selectedEvent?.notificationEmail || ''
             };
 
             const endpoint = import.meta.env.VITE_GAS_ENDPOINT;
