@@ -34,7 +34,8 @@ const ApplicationForm = () => {
             const hash = window.location.hash;
             if (hash && hash.includes('eventId=')) {
                 const id = hash.split('eventId=')[1];
-                const targetSchedule = flatSchedules.find(e => e.masterEventId === id && e.status === 'open');
+                // 日程ID(id)または勉強会ID(masterEventId)のいずれかに一致する募集中の日程を探す
+                const targetSchedule = flatSchedules.find(e => (e.id === id || e.masterEventId === id) && e.status === 'open');
                 if (targetSchedule) {
                     setFormData(prev => ({ ...prev, eventId: targetSchedule.id }));
                     setSelectedEventInfo(targetSchedule);
@@ -51,7 +52,8 @@ const ApplicationForm = () => {
             if (hash && hash.includes('eventId=')) {
                 const id = hash.split('eventId=')[1];
                 if (events.length > 0) {
-                    const targetSchedule = events.find(e => e.masterEventId === id && e.status === 'open');
+                    // 日程ID(id)または勉強会ID(masterEventId)のいずれかに一致する募集中の日程を探す
+                    const targetSchedule = events.find(e => (e.id === id || e.masterEventId === id) && e.status === 'open');
                     if (targetSchedule) {
                         setFormData(prev => ({ ...prev, eventId: targetSchedule.id }));
                         setSelectedEventInfo(targetSchedule);
