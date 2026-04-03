@@ -84,7 +84,9 @@ const ApplicationForm = () => {
         setStatus('submitting');
         
         try {
-            const selectedEvent = events.find(ev => ev.id === formData.eventId);
+            // formData.eventId から検索して見つからなかった場合の対策として、
+            // 画面に表示するために保持している selectedEventInfo を直接使用します
+            const selectedEvent = selectedEventInfo || events.find(ev => ev.id === formData.eventId);
             
             // GASへ送るデータ
             const submissionData = {
