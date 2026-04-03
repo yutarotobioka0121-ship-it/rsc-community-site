@@ -25,7 +25,7 @@ const SupportModal = ({ isOpen, onClose, type }) => {
     if (!isOpen) return null;
 
     const handleOverlayClick = (e) => {
-        if (e.target.className === 'support-modal-overlay animate-fade-in') {
+        if (e.target.classList.contains('support-modal-overlay')) {
             onClose();
         }
     };

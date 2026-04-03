@@ -18,7 +18,7 @@ const PhilosophyModal = ({ isOpen, onClose }) => {
 
     // オーバーレイ（背景）をクリックした時に閉じる
     const handleOverlayClick = (e) => {
-        if (e.target.className === 'modal-overlay animate-fade-in') {
+        if (e.target.classList.contains('modal-overlay')) {
             onClose();
         }
     };
