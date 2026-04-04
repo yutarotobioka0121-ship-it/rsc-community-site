@@ -7,6 +7,7 @@ const EventSchedule = () => {
     const [events, setEvents] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [selectedEvent, setSelectedEvent] = useState(null);
+    const [activeTab, setActiveTab] = useState('all'); // 'all', 'finance', 'skillup'
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -23,7 +24,28 @@ const EventSchedule = () => {
         fetchEvents();
     }, []);
 
+    // カテゴリー分類ロジック
+    const isFinance = (category) => {
+        if (!category) return false;
+        const keywords = ['ファイナンス', 'お金', 'NISA', 'iDeCo', '副業', '資産', '経済'];
+        return keywords.some(keyword => category.includes(keyword));
+    };
+
+    const isSkillUp = (category) => {
+        if (!category) return false;
+        const keywords = ['ビジネススキル', 'コミュニケーション', '自己啓発', '心理', 'スキルアップ'];
+        return keywords.some(keyword => category.includes(keyword));
+    };
+
+    const filteredEvents = events.filter(event => {
+        if (activeTab === 'all') return true;
+        if (activeTab === 'finance') return isFinance(event.category);
+        if (activeTab === 'skillup') return isSkillUp(event.category);
+        return true;
+    });
+
     const handleApplyClick = (eventOrId) => {
+// ... (rest of handles)
         const eventId = typeof eventOrId === 'object' ? eventOrId.id : eventOrId;
         setSelectedEvent(null);
 
@@ -55,21 +77,53 @@ const EventSchedule = () => {
                     </p>
                 </div>
 
+                {/* カテゴリータブ */}
+                {!isLoading && events.length > 0 && (
+                    <div className="category-tabs mb-10">
+                        <button 
+                            className={`tab-btn ${activeTab === 'all' ? 'active' : ''}`}
+                            onClick={() => setActiveTab('all')}
+                        >
+                            <span className="tab-icon">📅</span> 全て見る
+                        </button>
+                        <button 
+                            className={`tab-btn ${activeTab === 'finance' ? 'active' : ''}`}
+                            onClick={() => setActiveTab('finance')}
+                        >
+                            <span className="tab-icon">💰</span> ファイナンス・経済
+                        </button>
+                        <button 
+                            className={`tab-btn ${activeTab === 'skillup' ? 'active' : ''}`}
+                            onClick={() => setActiveTab('skillup')}
+                        >
+                            <span className="tab-icon">💡</span> 自己啓発・スキルアップ
+                        </button>
+                    </div>
+                )}
+
                 {isLoading ? (
                     <div className="text-center" style={{ padding: '60px 0', color: 'var(--color-text-muted)' }}>
                         イベント情報を読み込み中...
                     </div>
                 ) : (
-                    <div className="events-grid">
-                        {events.map((event) => (
-                            <EventCard 
-                                key={event.id} 
-                                event={event} 
-                                onApplyClick={handleApplyClick} 
-                                onClick={handleCardClick}
-                            />
-                        ))}
-                    </div>
+                    <>
+                        <div className="events-grid">
+                            {filteredEvents.map((event) => (
+                                <EventCard 
+                                    key={event.id} 
+                                    event={event} 
+                                    onApplyClick={handleApplyClick} 
+                                    onClick={handleCardClick}
+                                />
+                            ))}
+                        </div>
+
+                        {!isLoading && filteredEvents.length === 0 && (
+                            <div className="text-center" style={{ padding: '40px 0', color: 'var(--color-text-muted)' }}>
+                                <p>このカテゴリーで現在募集中のイベントはありません。</p>
+                            </div>
+                        )}
+                    </>
                 )}
 
                 <EventModal 
@@ -90,6 +144,54 @@ const EventSchedule = () => {
             <style>{`
                 .bg-light {
                     background-color: var(--color-bg-base);
+                }
+                
+                .category-tabs {
+                    display: flex;
+                    justify-content: center;
+                    gap: 12px;
+                    flex-wrap: wrap;
+                }
+
+                .tab-btn {
+                    padding: 10px 20px;
+                    border-radius: 50px;
+                    border: 2px solid var(--color-border);
+                    background-color: white;
+                    color: var(--color-text-muted);
+                    font-weight: 700;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    font-size: 0.95rem;
+                }
+
+                .tab-btn:hover {
+                    border-color: var(--color-primary-light);
+                    color: var(--color-primary);
+                }
+
+                .tab-btn.active {
+                    background-color: var(--color-primary);
+                    border-color: var(--color-primary);
+                    color: white;
+                    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+                }
+
+                .tab-icon {
+                    font-size: 1.1rem;
+                }
+
+                @media (max-width: 600px) {
+                    .category-tabs {
+                        gap: 8px;
+                    }
+                    .tab-btn {
+                        padding: 8px 16px;
+                        font-size: 0.85rem;
+                    }
                 }
                 
                 .events-grid {
