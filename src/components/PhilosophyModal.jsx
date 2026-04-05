@@ -35,80 +35,36 @@ const PhilosophyModal = ({ isOpen, onClose }) => {
                     <h2 className="modal-title">RSCの理念</h2>
                 </div>
 
-                <div className="modal-body mt-6">
-                    <div className="philosophy-quote card mb-8">
-                        <p className="quote-text">
-                            「一生モノの『経済』と『時間』を、仲間と共に創り出す。」
-                        </p>
+                <div className="modal-body mt-6" style={{ textAlign: 'left', color: 'var(--color-text-main)', lineHeight: '1.8' }}>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '8px', borderBottom: '2px solid var(--color-primary-light)', paddingBottom: '4px' }}>RSC 理念（Mission）</h3>
+                    <p style={{ marginBottom: '24px' }}>一生モノの「経済」と「時間」を、仲間と共に創り出す。</p>
+
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '16px', borderBottom: '2px solid var(--color-primary-light)', paddingBottom: '4px' }}>理念を支える3つの柱（The 3 Pillars）</h3>
+                    
+                    <div style={{ marginBottom: '24px' }}>
+                        <h4 style={{ fontWeight: 'bold', fontSize: '1.1rem', marginBottom: '8px' }}>1. 「自分」を磨き、未来を変える力をつける（自律の習慣）</h4>
+                        <p style={{ marginBottom: '12px' }}>未来の自分を助けられるのは、今の自分の行動だけです。</p>
+                        <p style={{ marginBottom: '8px', paddingLeft: '16px' }}>自分らしく一歩ずつ： 周りと比べるのではなく、昨日の自分より少しだけ前へ。自分の人生に責任を持ち、前向きに挑戦する姿勢を大切にします。</p>
+                        <p style={{ marginBottom: '8px', paddingLeft: '16px' }}>信頼される自分になる： 知識だけでなく、人として誠実であることを土台に、着実なスキルアップを目指します。</p>
                     </div>
 
-                    <div className="philosophy-intro mb-8">
-                        <h3 className="text-center mb-4" style={{ fontSize: '1.25rem', color: 'var(--color-primary-dark)', fontWeight: 'bold' }}>RSCの想い（Essence）</h3>
-                        <p className="text-center" style={{ fontSize: '1.15rem', fontWeight: 'bold', marginBottom: '16px' }}>
-                            「満たされた心で、そっと誰かの力に。」
-                        </p>
-                        <p>
-                            私たちが豊かさと自由を形にするのは、自分自身に「ゆとり」を持つためです。自分が満たされることで、自然と周りの人にも優しくなれたり、誰かの役に立ちたいと思える。
-                        </p>
-                        <p className="mt-4">
-                            そんな「善い循環（Force for Good）」が生まれる場所でありたいと願っています。
-                        </p>
+                    <div style={{ marginBottom: '24px' }}>
+                        <h4 style={{ fontWeight: 'bold', fontSize: '1.1rem', marginBottom: '8px' }}>2. 「先に与える」ことで、成功の輪を広げる（ギバーの精神）</h4>
+                        <p style={{ marginBottom: '12px' }}>一人の成功よりも、みんなで豊かになる方が、結果として自分も遠くへ行けます。</p>
+                        <p style={{ marginBottom: '8px', paddingLeft: '16px' }}>応援し合う文化： 自分の得意を仲間に教えたり、誰かの挑戦を応援したり。先に価値を届ける「与える人（ギバー）」であることで、最高のチームワークを生み出します。</p>
+                        <p style={{ marginBottom: '8px', paddingLeft: '16px' }}>共に育つ（Win-Win）： 誰かの足を引っ張るのではなく、互いの良さを引き出し合い、全員がプラスになる関係を築きます。</p>
                     </div>
 
-                    <div className="philosophy-pillars">
-                        <h3 className="text-center mb-6" style={{ fontSize: '1.4rem', color: 'var(--color-primary-dark)', fontWeight: 'bold' }}>理念を支える3つの柱</h3>
-
-                        <div className="pillar mb-8">
-                            <h3 className="pillar-title">1. 「自分」を磨き、未来を変える力をつける（自律の習慣）</h3>
-                            <p className="pillar-desc">
-                                未来の自分を助けられるのは、今の自分の行動だけです。
-                            </p>
-                            <ul className="pillar-list mt-4">
-                                <li>
-                                    <strong>自分らしく一歩ずつ:</strong><br />
-                                    周りと比べるのではなく、昨日の自分より少しだけ前へ。自分の人生に責任を持ち、前向きに挑戦する姿勢を大切にします。
-                                </li>
-                                <li className="mt-3">
-                                    <strong>信頼される自分になる:</strong><br />
-                                    知識だけでなく、人として誠実であることを土台に、着実なスキルアップを目指します。
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div className="pillar mb-8">
-                            <h3 className="pillar-title">2. 「先に与える」ことで、成功の輪を広げる（ギバーの精神）</h3>
-                            <p className="pillar-desc">
-                                一人の成功よりも、みんなで豊かになる方が、結果として自分も遠くへ行けます。
-                            </p>
-                            <ul className="pillar-list mt-4">
-                                <li>
-                                    <strong>応援し合う文化:</strong><br />
-                                    自分の得意を仲間に教えたり、誰かの挑戦を応援したり。先に価値を届ける「与える人（ギバー）」であることで、最高のチームワークを生み出します。
-                                </li>
-                                <li className="mt-3">
-                                    <strong>共に育つ（Win-Win）:</strong><br />
-                                    誰かの足を引っ張るのではなく、互いの良さを引き出し合い、全員がプラスになる関係を築きます。
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div className="pillar mb-8">
-                            <h3 className="pillar-title">3. 揺るぎない「豊かさ」と「ゆとり」を築く（自由の実現）</h3>
-                            <p className="pillar-desc">
-                                「お金」と「時間」を自分の手に取り戻し、人生の選択肢を増やします。
-                            </p>
-                            <ul className="pillar-list mt-4">
-                                <li>
-                                    <strong>長く続く安心を作る:</strong><br />
-                                    一時的な稼ぎではなく、ずっと自分を支えてくれる「知恵」と「仕組み」を学び、経済的な不安を安心に変えていきます。
-                                </li>
-                                <li className="mt-3">
-                                    <strong>大切なものを大切にする:</strong><br />
-                                    経済的なゆとりを「自由な時間」に変え、家族や趣味、新しい挑戦など、本当に価値を感じることに時間を使える人生を目指します。
-                                </li>
-                            </ul>
-                        </div>
+                    <div style={{ marginBottom: '32px' }}>
+                        <h4 style={{ fontWeight: 'bold', fontSize: '1.1rem', marginBottom: '8px' }}>3. 揺るぎない「豊かさ」と「ゆとり」を築く（自由の実現）</h4>
+                        <p style={{ marginBottom: '12px' }}>「お金」と「時間」を自分の手に取り戻し、人生の選択肢を増やします。</p>
+                        <p style={{ marginBottom: '8px', paddingLeft: '16px' }}>長く続く安心を作る： 一時的な稼ぎではなく、ずっと自分を支えてくれる「知恵」と「仕組み」を学び、経済的な不安を安心に変えていきます。</p>
+                        <p style={{ marginBottom: '8px', paddingLeft: '16px' }}>大切なものを大切にする： 経済的なゆとりを「自由な時間」に変え、家族や趣味、新しい挑戦など、本当に価値を感じることに時間を使える人生を目指します。</p>
                     </div>
+
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '8px', borderBottom: '2px solid var(--color-primary-light)', paddingBottom: '4px' }}>RSCの想い（Essence）</h3>
+                    <p style={{ marginBottom: '8px' }}>「満たされた心で、そっと誰かの力に。」</p>
+                    <p style={{ marginBottom: '8px' }}>私たちが豊かさと自由を形にするのは、自分自身に「ゆとり」を持つためです。自分が満たされることで、自然と周りの人にも優しくなれたり、誰かの役に立ちたいと思える。そんな「善い循環（Force for Good）」が生まれる場所でありたいと願っています。</p>
                 </div>
 
                 <div className="modal-footer text-center mt-4">
