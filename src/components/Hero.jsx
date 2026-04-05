@@ -14,16 +14,15 @@ const Hero = () => {
                 </div>
                 
                 <h1 className="hero-title animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                    <span className="title-phrase">学校では学べない、</span>
+                    <span className="title-phrase">一生モノの</span>
                     <wbr />
-                    <span className="title-phrase text-highlight">社会人に役立つ知識</span>
+                    <span className="title-phrase text-highlight">「経済」と「時間」</span>
                     <span className="title-phrase">を</span>
-                    <br className="mobile-break" />
-                    <span className="title-phrase">学ぼう</span>
                 </h1>
                 
                 <p className="hero-subtitle animate-fade-in" style={{ animationDelay: '0.3s' }}>
-                    本グループは学校教育では学べない、社会人に役立つスキルや考え方等を学び、それを伝えることを目的としたグループです。一緒に新しい分野にチャレンジしませんか？
+                    一生モノの「経済」と「時間」を、仲間と共に創り出す。<br />
+                    RSCは、自らの人生をデザインし、共に成長し合える挑戦者のためのコミュニティです。
                 </p>
                 
                 <div className="hero-actions animate-fade-in" style={{ animationDelay: '0.4s' }}>
