@@ -22,8 +22,8 @@ const About = () => {
                         <div className="philosophy-quote">
                             <span className="quote-icon-top">“</span>
                             <p className="main-philosophy">
-                                完璧じゃなくていい。ただ、昨日より一歩前へ。<br />
-                                その泥臭い挑戦の積み重ねが、やがて誰にも真似できないあなただけの『在り方』になる。
+                                「学びを力に。自分を自由に。」<br />
+                                <span style={{ fontSize: '1.2rem', display: 'block', marginTop: '12px' }}>〜 確かな経済基盤と、心豊かな時間を、みんなで。 〜</span>
                             </p>
                             <span className="quote-icon-bottom">”</span>
                         </div>
