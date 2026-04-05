@@ -37,7 +37,7 @@ const PhilosophyModal = ({ isOpen, onClose }) => {
 
                 <div className="modal-body mt-6" style={{ textAlign: 'left', color: 'var(--color-text-main)', lineHeight: '1.8' }}>
                     <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '8px', borderBottom: '2px solid var(--color-primary-light)', paddingBottom: '4px' }}>RSC 理念（Mission）</h3>
-                    <p style={{ marginBottom: '24px' }}>一生モノの「経済」と「時間」を、仲間と共に創り出す。</p>
+                    <p style={{ marginBottom: '24px' }}>一生モノの「経済」と「時間」の自由を、仲間と共に創り出す。</p>
 
                     <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '16px', borderBottom: '2px solid var(--color-primary-light)', paddingBottom: '4px' }}>理念を支える3つの柱（The 3 Pillars）</h3>
                     

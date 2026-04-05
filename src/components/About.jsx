@@ -22,7 +22,7 @@ const About = () => {
                         <div className="philosophy-quote">
                             <span className="quote-icon-top">“</span>
                             <p className="main-philosophy">
-                                一生モノの「経済」と「時間」を、<br />
+                                一生モノの「経済」と「時間」の自由を、<br />
                                 仲間と共に創り出す。
                             </p>
                             <span className="quote-icon-bottom">”</span>
