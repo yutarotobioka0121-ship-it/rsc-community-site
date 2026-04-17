@@ -156,8 +156,19 @@ export const getEventSchedule = async () => {
         // Mapのvalueを配列に変換
         const groupedEvents = Array.from(eventMap.values());
 
-        return applyDeadlineStatus(groupedEvents);
+        const finalEvents = applyDeadlineStatus(groupedEvents);
 
+        // 表示順のソート: 1. 募集中優先 (open > else), 2. 日付順 (昇順)
+        return finalEvents.sort((a, b) => {
+            // ステータスでの優先順位判定 ('open' を最優先)
+            if (a.status === 'open' && b.status !== 'open') return -1;
+            if (a.status !== 'open' && b.status === 'open') return 1;
+            
+            // 同じステータスグループ内での日付順ソート (近い順)
+            const dateA = new Date(a.date);
+            const dateB = new Date(b.date);
+            return dateA - dateB;
+        });
     } catch (error) {
         console.error("Failed to fetch events from microCMS:", error);
         // エラー時は空配列を返すか、エラーハンドリングを行う
